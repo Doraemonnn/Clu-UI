@@ -1,0 +1,181 @@
+@charset "UTF-8";
+
+.cl-button-- {
+  display: inline-block;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  background: $--button-default-background-color;
+  border: $--border-base;
+  border-color: $--button-default-border-color;
+  color: $--button-default-font-color;
+  -webkit-appearance: none;
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  margin: 0;
+  transition: 0.5s;
+
+  &.is-disabled {
+    &,
+    &:hover,
+    &:focus {
+      color: $--button-disabled-font-color;
+      background-color: $--button-disabled-background-color;
+      border-color: $--button-disabled-border-color;
+      cursor: not-allowed;
+    }
+  }
+
+  &.is-plain {
+    &:hover,
+    &:focus {
+      background: $--color-white;
+      border-color: $--color-primary;
+      color: $--color-primary;
+    }
+  }
+
+  &.is-round {
+    border-radius: 20px;
+  }
+
+  &:hover,
+  &:focus {
+    color: $--color-primary;
+    border-color: $--color-primary-light-7;
+    background-color: $--color-primary-light-9;
+  }
+
+  /***************************** 颜色 *****************************/
+
+  @mixin button-plain($color) {
+    color: $color;
+    background: mix($--color-white, $color, 90%);
+    border-color: mix($--color-white, $color, 60%);
+
+    &:hover,
+    &:focus {
+      background: $color;
+      border-color: $color;
+      color: $--color-white;
+    }
+
+    &.is-disabled {
+      &,
+      &:hover,
+      &:focus,
+      &:active {
+        color: mix($--color-white, $color, 40%);
+        background-color: mix($--color-white, $color, 90%);
+        border-color: mix($--color-white, $color, 80%);
+      }
+    }
+  }
+
+  @mixin button-variant($color, $background-color, $border-color) {
+    color: $color;
+    background-color: $background-color;
+    border-color: $border-color;
+
+    &:hover,
+    &:focus {
+      background: mix($--color-white, $background-color, $--button-hover-tint-percent);
+      border-color: mix($--color-white, $border-color, $--button-hover-tint-percent);
+      color: $color;
+    }
+
+    &.is-disabled {
+      &,
+      &:hover,
+      &:focus,
+      &:active {
+        color: $--color-white;
+        background-color: mix($background-color, $--color-white);
+        border-color: mix($border-color, $--color-white);
+      }
+    }
+
+    &.is-plain {
+      @include button-plain($background-color);
+    }
+  }
+
+  &primary {
+    @include button-variant(
+      $--button-primary-font-color,
+      $--button-primary-background-color,
+      $--button-primary-border-color
+    );
+  }
+
+  &success {
+    @include button-variant(
+      $--button-success-font-color,
+      $--button-success-background-color,
+      $--button-success-border-color
+    );
+  }
+
+  &warning {
+    @include button-variant(
+      $--button-warning-font-color,
+      $--button-warning-background-color,
+      $--button-warning-border-color
+    );
+  }
+
+  &danger {
+    @include button-variant(
+      $--button-danger-font-color,
+      $--button-danger-background-color,
+      $--button-danger-border-color
+    );
+  }
+
+  &info {
+    @include button-variant($--button-info-font-color, $--button-info-background-color, $--button-info-border-color);
+  }
+
+  /***************************** 大小 *****************************/
+
+  @mixin button-size($padding-vertical, $padding-horizontal, $font-size, $border-radius) {
+    padding: $padding-vertical $padding-horizontal;
+    font-size: $font-size;
+    border-radius: $border-radius;
+  }
+
+  @include button-size(
+    $--button-padding-vertical,
+    $--button-padding-horizontal,
+    $--button-font-size,
+    $--button-border-radius
+  );
+
+  &medium {
+    @include button-size(
+      $--button-medium-padding-vertical,
+      $--button-medium-padding-horizontal,
+      $--button-medium-font-size,
+      $--button-medium-border-radius
+    );
+  }
+
+  &small {
+    @include button-size(
+      $--button-small-padding-vertical,
+      $--button-small-padding-horizontal,
+      $--button-small-font-size,
+      $--button-small-border-radius
+    );
+  }
+
+  &mini {
+    @include button-size(
+      $--button-mini-padding-vertical,
+      $--button-mini-padding-horizontal,
+      $--button-mini-font-size,
+      $--button-mini-border-radius
+    );
+  }
+}
